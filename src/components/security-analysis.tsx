@@ -6,7 +6,7 @@ import { analyzeSecurity } from '@/lib/actions';
 import type { EnhanceVoicePrintSecurityOutput } from '@/ai/flows/enhance-voice-print-security';
 import { Button } from './ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
-import { Loader2, ShieldCheck, ShieldAlert, Bot } from 'lucide-react';
+import { Loader2, ShieldCheck, ShieldAlert, Bot, Cloud } from 'lucide-react';
 import { Badge } from './ui/badge';
 import { useToast } from '@/hooks/use-toast';
 
@@ -113,6 +113,17 @@ export default function SecurityAnalysis() {
                 </ul>
               ) : <p className="text-sm text-muted-foreground">No specific actions recommended at this time.</p>}
             </div>
+             {analysisResult.securityAssessment.voiceWordCloud && (
+              <div>
+                <h4 className="font-semibold flex items-center gap-2">
+                  <Cloud className="h-5 w-5 text-primary" />
+                  Voice Word Cloud
+                </h4>
+                <p className="text-sm text-muted-foreground italic p-4 bg-muted/50 rounded-lg mt-2">
+                  {analysisResult.securityAssessment.voiceWordCloud}
+                </p>
+              </div>
+            )}
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center rounded-lg border border-dashed p-12 text-center">

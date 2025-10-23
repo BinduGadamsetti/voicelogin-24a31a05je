@@ -17,7 +17,7 @@ const EnhanceVoicePrintSecurityInputSchema = z.object({
   voicePrintDataUri: z
     .string()
     .describe(
-      'A voice print as a data URI that must include a MIME type and use Base64 encoding. Expected format: \'data:<mimetype>;base64,<encoded_data>\'.' // Ensure correct format and description
+      "A voice print as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'." // Ensure correct format and description
     ),
   userId: z.string().describe('The ID of the user associated with the voice print.'), // User identification for context
 });
@@ -30,12 +30,17 @@ const EnhanceVoicePrintSecurityOutputSchema = z.object({
     threatLevel: z
       .string()
       .describe(
-        'An assessment of the threat level, e.g., \'low\', \'medium\', or \'high\'. Provide reasoning for the assigned threat level.'
+        "An assessment of the threat level, e.g., 'low', 'medium', or 'high'. Provide reasoning for the assigned threat level."
       ),
     anomaliesDetected: z.array(z.string()).describe('A list of any anomalies detected in the voice print.'),
     recommendedActions: z
       .array(z.string())
       .describe('A list of recommended actions to enhance the security of the voice print.'),
+    voiceWordCloud: z
+      .string()
+      .describe(
+        'A string of words that represents a word cloud of the most prominent words in the voice recording. This is used for additional security analysis and visualization.'
+      ),
   }),
 });
 
@@ -55,7 +60,7 @@ const enhanceVoicePrintSecurityPrompt = ai.definePrompt({
 
 You will analyze the provided voice print for anomalies, potential threats like voice cloning or mimicking, and overall security.
 
-Based on your analysis, you will provide a security assessment, including the overall security status (isSecure), threat level, any detected anomalies, and recommended actions to enhance security.
+Based on your analysis, you will provide a security assessment, including the overall security status (isSecure), threat level, any detected anomalies, and recommended actions to enhance security. You will also generate a "voice-word-cloud" from the most prominent words spoken in the voice recording.
 
 Voice Print: {{media url=voicePrintDataUri}}
 User ID: {{{userId}}}
