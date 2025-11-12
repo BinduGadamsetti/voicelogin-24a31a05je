@@ -4,12 +4,12 @@
 # The command to build your app
 build:
   # The command to run to build your app
-  run: next build
+  run: npm run build
 
 # The command to start your app
 start:
   # The command to run to start your app
-  run: next start -p ${PORT}
+  run: npm run start
 
 runConfig:
   # Increase this value if you'd like to automatically spin up
